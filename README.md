@@ -18,5 +18,5 @@ optional arguments:
 
 ## Output
 ```
-team_name {constrained,unconstrained} system_description_from_free_field bleu ter
+team_name {constrained,unconstrained} system_description_from_free_field bleu_score ter_score
 ```
