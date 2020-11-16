@@ -1,6 +1,12 @@
 # Covid-19 MLIA: MT Evaluation
 This repository contains the evaluation script used in the [MT task](http://eval.covid19-mlia.eu/task3/) from [Covid-19 MLIA](http://eval.covid19-mlia.eu/).
 
+## Requirements
+This script makes use of the following libraries, which can be installed through pip:
+```
+pip install lxml sacrebleu
+```
+
 ## Usage
 ```
 python evaluate.py [-h] -t translations -r references
