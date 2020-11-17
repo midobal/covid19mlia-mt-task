@@ -16,8 +16,8 @@ def compute_metrics(ref, hyp, hyp_order):
             for segment in ref[id]:
                 refs.append(segment)
         except KeyError:
-            sys.stderr.write('Error: reference not found for segment'
-                             + ' "' + segment + '"\n')
+            sys.stderr.write('Error: there are no references for document'
+                             + ' "' + id + '"\n')
             sys.exit(-1)
     try:
         bleu = sacrebleu.corpus_bleu(hyps, [refs])
