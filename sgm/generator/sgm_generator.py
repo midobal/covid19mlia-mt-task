@@ -12,7 +12,8 @@ def generate_document(file, root):
         sys.stderr.write('Error: ' + file + ' does not exist.\n')
         sys.exit(-1)
 
-    document = ET.SubElement(root, 'doc', docid=os.path.basename(file))
+    document = ET.SubElement(root, 'doc',
+                             docid=os.path.basename(file).split('.')[0])
     counter = 1
     for seg in f.readlines():
         segment = ET.SubElement(document, 'seg', id=str(counter))
