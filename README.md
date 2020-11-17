@@ -19,7 +19,8 @@ Here's a list of the different scripts used for the shared task:
 * [Automatic evaluation](evaluation).
 
 ### Utilities
-* [SGM generator](sgm).
+* [SGM generator](sgm/generator).
+* [SGM reader](sgm/reader).
 * [Translation Memory eXchange Reader](tmx).
 
 ## Rolling Report
