@@ -18,6 +18,9 @@ Here's a list of the different scripts used for the shared task:
 ### Evaluation
 * [Automatic evaluation](evaluation).
 
+### Corpus generation
+* [Test sets](tests).
+
 ### Utilities
 * [SGM generator](sgm/generator).
 * [SGM reader](sgm/reader).
