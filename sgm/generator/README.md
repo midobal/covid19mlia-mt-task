@@ -10,7 +10,7 @@ pip install lxml
 ## Usage
 ```
 python sgm_generator.py [-h] -f text_files [text_files ...] -o sgm_file
-                        [-i id] [-r]
+                        [-i id] -t {source,translation,reference}
 
 This script generates an sgm file.
 
@@ -20,8 +20,7 @@ optional arguments:
                         text files to convert into sgm.
   -o sgm_file, --output sgm_file
                         file in which to store the sgm.
-  -i id, --id id        id to include in the file. (Default: test.)
-  -r, --reference       indicates that the file is intented to be used as a
-                        reference.
-
+  -i id, --id id        id to use as the docid of the sgm. (Default: test.)
+  -t {source,translation,reference}, --type {source,translation,reference}
+                        type of document.
 ```

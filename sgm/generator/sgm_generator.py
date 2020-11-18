@@ -28,19 +28,24 @@ def parse_args():
                         required=True, help='text files to convert into sgm.')
     parser.add_argument('-o', '--output', metavar='sgm_file',
                         required=True, help='file in which to store the sgm.')
-    parser.add_argument('-i', '--id', metavar='id', help='id to include in \
-                        the file. (Default: test.)')
-    parser.add_argument('-r', '--reference', default=False,
-                        action='store_true', help='indicates that the file \
-                        is intented to be used as a reference.')
+    parser.add_argument('-i', '--id', metavar='id', help='id to use as the \
+                        docid of the sgm. (Default: test.)')
+    parser.add_argument('-t', '--type', choices=['source', 'translation',
+                                                 'reference'], required=True,
+                        help='type of document.')
 
     return parser.parse_args()
 
 
 if __name__ == '__main__':
     args = parse_args()
-    type = 'srcset' if not args.reference else 'refset'
     id = args.id if args.id is not None else 'test'
+    if args.type == 'source':
+        type = 'srcset'
+    elif args.type == 'translation':
+        type = 'tstset'
+    else:
+        type = 'refset'
 
     root = ET.Element(type, setid=id, srclang='any')
     for file in args.files:
