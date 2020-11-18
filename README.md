@@ -27,6 +27,6 @@ Here's a list of the different scripts used for the shared task:
 * [Translation Memory eXchange Reader](tmx).
 
 ## Findings
-* **First round**: *ongoing*.
+* **First round**: *still ongoing*.
 * **Second round**: *not yet started*.
 * **Third round**: *not yet started*.
