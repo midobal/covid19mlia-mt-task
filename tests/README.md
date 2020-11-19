@@ -6,7 +6,7 @@
 Description of how the data was crawl will be added at a later date.
 
 ### Data selection
-Given the set of *.file* documents obtained from the data crawling, for each language pair, we created a new document (`scored_test`) composed of:
+Given the set of *.filt* documents obtained from the data crawling, for each language pair, we created a new document (`scored_test`) composed of:
 ```
 alignment_score source_segment target_segment file_name
 ```
