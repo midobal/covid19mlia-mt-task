@@ -29,3 +29,13 @@ Finally, out of all the available segments (from each of the `scored_test` docum
 python select.py scored_test average_segment_length
 ```
 where `average_sentence_length` is the average number of words per segment from the training data set.
+
+### SGM generation
+We generated the sgm files for the documents obtained from the data selection using the [sgm generator](https://github.com/midobal/covid19mlia-mt-task/tree/master/sgm/generator):
+```
+for tgt in de el es fr it sv; do python sgm_generator.py -f en-${tgt}/test.en \
+--id round1_test -t source -o test-en${tgt}-src.en.sgm; done
+
+for tgt in de el es fr it sv; do python sgm_generator.py -f en-${tgt}/test.${tgt} \
+--id round1_test -t reference -o test-en${tgt}-ref.${tgt}.sgm; done
+```
