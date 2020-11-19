@@ -26,9 +26,11 @@ sort -g -r > scored_test
 
 Finally, out of all the available segments (from each of the `scored_test` documents from each language pair), we selected for each language pair the best 2000 segments by doing:
 ```
-python select.py scored_test average_segment_length
+python select.py scored_test average_segment_length > test.scores
+awk -F "\t" '{print $2}' > test.en
+awk -F "\t" '{print $3}' > test.${tgt}
 ```
-where `average_sentence_length` is the average number of words per segment from the training data set.
+where `average_sentence_length` is the average number of words per segment from the training data set; and `${tgt}` is the target language.
 
 ### SGM generation
 We generated the sgm files for the documents obtained from the data selection using the [sgm generator](https://github.com/midobal/covid19mlia-mt-task/tree/master/sgm/generator):
