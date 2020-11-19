@@ -24,7 +24,7 @@ Here's a list of the different scripts used for the shared task:
 ### Utilities
 * [SGM generator](sgm/generator).
 * [SGM reader](sgm/reader).
-* [Translation Memory eXchange Reader](tmx).
+* [Translation Memory eXchange reader](tmx).
 
 ## Findings
 * **First round**: *still ongoing*.
