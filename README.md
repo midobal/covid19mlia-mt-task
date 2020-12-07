@@ -17,6 +17,7 @@ The main challenge is that the text to be translated is specialized on the new a
 Here's a list of the different scripts used for the shared task:
 ### Evaluation
 * [Automatic evaluation](evaluation).
+* [Statistical differences](art).
 
 ### Corpus generation
 * [Test sets](tests).
