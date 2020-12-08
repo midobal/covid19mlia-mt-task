@@ -98,10 +98,11 @@ def parse_args():
                         references.')
     parser.add_argument('-t', '--trials', metavar='trials',
                         required=False, default=10000, help='number of trials\
-                         to compute (default: 10000).')
+                         to compute (default: 10000).', type=int)
     parser.add_argument('-p', '--pvalue', metavar='p-value',
                         required=False, default=0.05, help='p-value for \
-                        assessing statistical significance (default: 0.05).')
+                        assessing statistical significance (default: 0.05).',
+                        type=float)
 
     return parser.parse_args()
 
