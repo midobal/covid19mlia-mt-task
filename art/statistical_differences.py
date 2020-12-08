@@ -18,7 +18,7 @@ def assess_differences(a_metrics, b_metrics, trials, p_value):
     if test.run() < p_value:
         print('Systems are statistically different.')
     else:
-        print('System are not statistically different.')
+        print('Systems are not statistically different.')
 
 
 def compute_metrics(ref, hyp, hyp_order):
