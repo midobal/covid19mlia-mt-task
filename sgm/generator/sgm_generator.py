@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 import argparse
 import sys
-import os
 import lxml.etree as ET
 
 
-def generate_document(file, root):
+def generate_document(file, root, id):
     try:
         f = open(file, 'r')
     except IOError:
@@ -13,7 +12,7 @@ def generate_document(file, root):
         sys.exit(-1)
 
     document = ET.SubElement(root, 'doc',
-                             docid=os.path.basename(file).split('.')[0])
+                             docid=id)
     counter = 1
     for seg in f.readlines():
         segment = ET.SubElement(document, 'seg', id=str(counter))
@@ -49,7 +48,7 @@ if __name__ == '__main__':
 
     root = ET.Element(type, setid=id, srclang='any')
     for file in args.files:
-        generate_document(file, root)
+        generate_document(file, root, id)
     output = open(args.output, 'w')
     output.write(ET.tostring(root, pretty_print=True,
                              encoding='utf8').decode('utf8'))
