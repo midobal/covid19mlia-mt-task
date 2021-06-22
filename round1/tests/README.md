@@ -1,12 +1,7 @@
 # Generation of the Test Sets
 
-## Round 1
-
-### Data crawling
-Description of how the data was crawl will be added at a later date.
-
-### Data selection
-Given the set of *.filt* documents obtained from the data crawling, for each language pair, we created a new document (`scored_test`) composed of:
+## Data selection
+Given the set of *.filt* documents obtained from the [data crawling](../data), for each language pair, we created a new document (`scored_test`) composed of:
 ```
 alignment_score source_segment target_segment file_name
 ```
@@ -32,7 +27,7 @@ awk -F "\t" '{print $3}' > test.${tgt}
 ```
 where `average_sentence_length` is the average number of words per segment from the training data set; and `${tgt}` is the target language.
 
-### SGM generation
+## SGM generation
 We generated the sgm files for the documents obtained from the data selection using the [sgm generator](https://github.com/midobal/covid19mlia-mt-task/tree/master/sgm/generator):
 ```
 for tgt in de el es fr it sv; do python sgm_generator.py -f en-${tgt}/test.en \

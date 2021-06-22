@@ -13,21 +13,24 @@ The goal of the MT task is to evaluate systems focused on the Covid-19 related t
 
 The main challenge is that the text to be translated is specialized on the new and high-relevant topic of Covid-19. The task is open for beginners and established research groups from any area of interest in the scientific community, the public administration and the industry. At the end of each round, participants will write/update an incremental report explaining their system. The report will highlight which methods have been used.
 
-## Scripts
-Here's a list of the different scripts used for the shared task:
-### Evaluation
-* [Automatic evaluation](evaluation).
-* [Statistical differences](art).
+## Round 1
 
 ### Corpus generation
-* [Test sets](tests).
+* [Data crawling, training and validation sets](round1/data).
+* [Test sets](round1/tests).
 
-### Utilities
+### Evaluation
+* [Automatic evaluation](round1/evaluation).
+* [Statistical differences](round1/art).
+
+### Overview
+* Round 1 virtual meeting: [slides](); [presentation]().
+* [Report](https://bitbucket.org/covid19-mlia/organizers-task3/raw/33f5422104b980deef84aa8b78d97ec5c841debd/report/rounds/round1.pdf).
+
+## Utilities
 * [SGM generator](sgm/generator).
 * [SGM reader](sgm/reader).
 * [Translation Memory eXchange reader](tmx).
 
 ## Findings
-* **First round**: *still ongoing*.
-* **Second round**: *not yet started*.
-* **Third round**: *not yet started*.
+* [Rolling report](https://bitbucket.org/covid19-mlia/organizers-task3/src/master/report/report.pdf).
