@@ -27,6 +27,12 @@ The main challenge is that the text to be translated is specialized on the new a
 * Round 1 virtual meeting: [slides](https://raw.githubusercontent.com/midobal/covid19mlia-mt-task/master/slides/overview1.pdf); [presentation](https://youtu.be/vZgNlEdX7XE?t=5510).
 * [Report](https://bitbucket.org/covid19-mlia/organizers-task3/raw/33f5422104b980deef84aa8b78d97ec5c841debd/report/rounds/round1.pdf).
 
+## Round 2
+
+### Corpus generation
+* [Data crawling](round2/data).
+* [Training, validation and test sets](round2/partitions).
+
 ## Utilities
 * [SGM generator](sgm/generator).
 * [SGM reader](sgm/reader).
