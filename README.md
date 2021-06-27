@@ -10,6 +10,7 @@ The goal of the MT task is to evaluate systems focused on the Covid-19 related t
 * English–Italian.
 * English–Modern Greek.
 * English–Swedish.
+* English–Arabic. (From round 2.)
 
 The main challenge is that the text to be translated is specialized on the new and high-relevant topic of Covid-19. The task is open for beginners and established research groups from any area of interest in the scientific community, the public administration and the industry. At the end of each round, participants will write/update an incremental report explaining their system. The report will highlight which methods have been used.
 
