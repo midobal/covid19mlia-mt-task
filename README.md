@@ -34,6 +34,9 @@ The main challenge is that the text to be translated is specialized on the new a
 * [Data crawling](round2/data).
 * [Training, validation and test sets](round2/partitions).
 
+### Evaluation
+* [Automatic evaluation](round2/evaluation).
+
 ## Utilities
 * [SGM generator](sgm/generator).
 * [SGM reader](sgm/reader).
