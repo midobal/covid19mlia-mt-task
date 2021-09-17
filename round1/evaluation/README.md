@@ -1,5 +1,5 @@
-# Automatic Evaluation
-This repository contains the evaluation script used for computing an automatic evaluation of translations submitted by the participants.
+# Automatic Evaluation (Round 1)
+This repository contains the evaluation script used for computing the automatic evaluation of translations submitted by the participants on round 1.
 
 ## Requirements
 This script makes use of the following libraries, which can be installed through pip:
@@ -24,5 +24,5 @@ optional arguments:
 
 ## Output
 ```
-team_name {constrained,unconstrained} system_description_from_free_field bleu_score ter_score
+team_name {constrained,unconstrained} system_description_from_free_field bleu_score chrf_score
 ```
