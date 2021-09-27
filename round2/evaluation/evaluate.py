@@ -45,9 +45,14 @@ def compute_metrics(ref, hyp, hyp_order):
     refs_file = save_to_file(refs)
 
     # Compute BEER
-    process = subprocess.Popen((dir + '/beer_2.0/beer -s ' + hyps_file + ' -r '
-                                + refs_file).split(), stdout=subprocess.PIPE)
-    beer, error = process.communicate()
+    try:
+        process = subprocess.Popen((dir + '/beer_2.0/beer -s ' + hyps_file
+                                    + ' -r ' + refs_file).split(),
+                                   stdout=subprocess.PIPE)
+        beer, error = process.communicate()
+    except FileNotFoundError:
+        sys.stderr.write('Error: Beer requirement has not been satisfied.\n')
+        sys.exit(-1)
 
     # Delete aux files
     process = subprocess.Popen(('rm ' + hyps_file + ' '
