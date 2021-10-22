@@ -36,6 +36,7 @@ The main challenge is that the text to be translated is specialized on the new a
 
 ### Evaluation
 * [Automatic evaluation](round2/evaluation).
+* [Statistical differences](round2/art).
 
 ## Utilities
 * [SGM generator](sgm/generator).
