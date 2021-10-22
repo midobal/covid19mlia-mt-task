@@ -1,5 +1,5 @@
-# Approximate Randomization Testing
-This repository contains the script used for assessing the statistical significance of the difference in performance between two systems.
+# Statistical Significance (Round 1)
+This repository contains the script used for assessing the statistical significance of the difference in performance between two systems according to BLEU and ChrF.
 
 ## Requirements
 This script makes use of the following libraries, which can be installed through pip:
