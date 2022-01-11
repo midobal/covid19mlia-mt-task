@@ -36,7 +36,8 @@ def compute_metrics(ref, hyp, hyp_order):
                              + ' "' + id + '"\n')
             sys.exit(-1)
 
-    metrics = []
+    bleu_scores = []
+    ter_scores = []
     for n in range(len(hyps)):
         # Compute BLEU and TER
         try:
@@ -47,9 +48,10 @@ def compute_metrics(ref, hyp, hyp_order):
                              + ' lengths.\n')
             sys.exit(-1)
 
-        metrics.append([bleu.score] + [ter.score])
+        bleu_scores.append([bleu.score])
+        ter_scores.append([ter.score])
 
-    return metrics
+    return bleu_scores, ter_scores
 
 
 def get_segments(file):
@@ -117,7 +119,11 @@ if __name__ == '__main__':
     a, a_order = get_segments(args.systema)
     b, b_order = get_segments(args.systemb)
 
-    a_metrics = compute_metrics(ref, a, a_order)
-    b_metrics = compute_metrics(ref, b, b_order)
+    a_bleu, a_ter = compute_metrics(ref, a, a_order)
+    b_bleu, b_ter = compute_metrics(ref, b, b_order)
 
-    assess_differences(a_metrics, b_metrics, args.trials, args.pvalue)
+    print('Studying bleu scores.')
+    assess_differences(a_bleu, b_bleu, args.trials, args.pvalue)
+
+    print('Studying ter scores.')
+    assess_differences(a_bleu, b_bleu, args.trials, args.pvalue)
