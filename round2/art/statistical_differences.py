@@ -6,6 +6,16 @@ import sacrebleu
 from art import aggregators
 from art import scores
 from art import significance_tests
+import os
+import time
+import subprocess
+
+
+def save_to_file(sentence):
+    file = '/tmp/' + str(time.time()) + '_covid19mlia'
+    with open(file, 'w') as f:
+        f.write(sentence)
+    return file
 
 
 def assess_differences(a_metrics, b_metrics, trials, p_value):
@@ -38,6 +48,8 @@ def compute_metrics(ref, hyp, hyp_order):
 
     bleu_scores = []
     ter_scores = []
+    beer_scores = []
+    dir = os.path.dirname(os.path.realpath(sys.argv[0]))
     for n in range(len(hyps)):
         # Compute BLEU and TER
         try:
@@ -48,10 +60,30 @@ def compute_metrics(ref, hyp, hyp_order):
                              + ' lengths.\n')
             sys.exit(-1)
 
+        # Compute BEER
+        hyps_file = save_to_file(hyps[n])
+        refs_file = save_to_file(refs[n])
+        try:
+            process = subprocess.Popen((dir + '/beer_2.0/beer -s ' + hyps_file
+                                        + ' -r ' + refs_file).split(),
+                                       stdout=subprocess.PIPE)
+            beer, error = process.communicate()
+        except FileNotFoundError:
+            sys.stderr.write('Error: Beer requirement has not been'
+                             + 'satisfied.\n')
+            sys.exit(-1)
+
+        # Delete aux files
+        process = subprocess.Popen(('rm ' + hyps_file + ' '
+                                    + refs_file).split(),
+                                   stdout=subprocess.PIPE)
+        output, error = process.communicate()
+
         bleu_scores.append([bleu.score])
         ter_scores.append([ter.score])
+        beer_scores.append([float(beer.split()[-1])])
 
-    return bleu_scores, ter_scores
+    return bleu_scores, ter_scores, beer_scores
 
 
 def get_segments(file):
@@ -119,11 +151,14 @@ if __name__ == '__main__':
     a, a_order = get_segments(args.systema)
     b, b_order = get_segments(args.systemb)
 
-    a_bleu, a_ter = compute_metrics(ref, a, a_order)
-    b_bleu, b_ter = compute_metrics(ref, b, b_order)
+    a_bleu, a_ter, a_beer = compute_metrics(ref, a, a_order)
+    b_bleu, b_ter, b_beer = compute_metrics(ref, b, b_order)
 
     print('Studying bleu scores.')
     assess_differences(a_bleu, b_bleu, args.trials, args.pvalue)
 
     print('Studying ter scores.')
-    assess_differences(a_bleu, b_bleu, args.trials, args.pvalue)
+    assess_differences(a_ter, b_ter, args.trials, args.pvalue)
+
+    print('Studying beer scores.')
+    assess_differences(a_beer, b_beer, args.trials, args.pvalue)

@@ -7,6 +7,12 @@ This script makes use of the following libraries, which can be installed through
 pip install lxml sacrebleu
 ```
 
+Additionally, you need to download [Beer](https://github.com/stanojevic/beer) on the same directory as this script:
+```
+wget https://raw.githubusercontent.com/stanojevic/beer/master/packaged/beer_2.0.tar.gz
+tar xfvz beer_2.0.tar.gz; rm beer_2.0.tar.gz
+```
+
 ## Usage
 ```
 python statistical_differences.py [-h] -a system_a -b system_b -r references
