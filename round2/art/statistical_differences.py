@@ -31,7 +31,7 @@ def assess_differences(a_metrics, b_metrics, trials, p_value):
         print('Systems are not statistically different.')
 
 
-def compute_metrics(ref, hyp, hyp_order):
+def compute_metrics(ref, hyp, hyp_order, metric):
     # Read sentences
     refs = []
     hyps = []
@@ -46,44 +46,51 @@ def compute_metrics(ref, hyp, hyp_order):
                              + ' "' + id + '"\n')
             sys.exit(-1)
 
-    bleu_scores = []
-    ter_scores = []
-    beer_scores = []
+    scores = []
     dir = os.path.dirname(os.path.realpath(sys.argv[0]))
     for n in range(len(hyps)):
-        # Compute BLEU and TER
-        try:
-            bleu = sacrebleu.corpus_bleu([hyps[n]], [[refs[n]]])
-            ter = sacrebleu.corpus_ter([hyps[n]], [[refs[n]]])
-        except EOFError:
-            sys.stderr.write('Error: source and reference have different'
-                             + ' lengths.\n')
-            sys.exit(-1)
+        if metric == 'bleu':
+            try:
+                score = sacrebleu.corpus_bleu([hyps[n]], [[refs[n]]])
+            except EOFError:
+                sys.stderr.write('Error: source and reference have different'
+                                 + ' lengths.\n')
+                sys.exit(-1)
 
-        # Compute BEER
-        hyps_file = save_to_file(hyps[n])
-        refs_file = save_to_file(refs[n])
-        try:
-            process = subprocess.Popen((dir + '/beer_2.0/beer -s ' + hyps_file
-                                        + ' -r ' + refs_file).split(),
+        elif metric == 'ter':
+            try:
+                score = sacrebleu.corpus_ter([hyps[n]], [[refs[n]]])
+            except EOFError:
+                sys.stderr.write('Error: source and reference have different'
+                                 + ' lengths.\n')
+                sys.exit(-1)
+
+        else:
+            hyps_file = save_to_file(hyps[n])
+            refs_file = save_to_file(refs[n])
+            try:
+                process = subprocess.Popen((dir + '/beer_2.0/beer -s '
+                                            + hyps_file + ' -r '
+                                            + refs_file).split(),
+                                           stdout=subprocess.PIPE)
+                score, error = process.communicate()
+            except FileNotFoundError:
+                sys.stderr.write('Error: Beer requirement has not been'
+                                 + 'satisfied.\n')
+                sys.exit(-1)
+
+            # Delete aux files
+            process = subprocess.Popen(('rm ' + hyps_file + ' '
+                                        + refs_file).split(),
                                        stdout=subprocess.PIPE)
-            beer, error = process.communicate()
-        except FileNotFoundError:
-            sys.stderr.write('Error: Beer requirement has not been'
-                             + 'satisfied.\n')
-            sys.exit(-1)
+            output, error = process.communicate()
 
-        # Delete aux files
-        process = subprocess.Popen(('rm ' + hyps_file + ' '
-                                    + refs_file).split(),
-                                   stdout=subprocess.PIPE)
-        output, error = process.communicate()
+        if metric == 'beer':
+            scores.append([float(score.split()[-1])])
+        else:
+            scores.append([score.score])
 
-        bleu_scores.append([bleu.score])
-        ter_scores.append([ter.score])
-        beer_scores.append([float(beer.split()[-1])])
-
-    return bleu_scores, ter_scores, beer_scores
+    return scores
 
 
 def get_segments(file):
@@ -141,6 +148,9 @@ def parse_args():
                         required=False, default=0.05, help='p-value for \
                         assessing statistical significance (default: 0.05).',
                         type=float)
+    parser.add_argument('-m', '--metric', metavar='metric',
+                        choices=['bleu', 'ter', 'beer'], required=False,
+                        default='bleu', help='metric to compute.')
 
     return parser.parse_args()
 
@@ -151,14 +161,8 @@ if __name__ == '__main__':
     a, a_order = get_segments(args.systema)
     b, b_order = get_segments(args.systemb)
 
-    a_bleu, a_ter, a_beer = compute_metrics(ref, a, a_order)
-    b_bleu, b_ter, b_beer = compute_metrics(ref, b, b_order)
+    a_scores = compute_metrics(ref, a, a_order, args.metric)
+    b_scores = compute_metrics(ref, b, b_order, args.metric)
 
-    print('Studying bleu scores.')
-    assess_differences(a_bleu, b_bleu, args.trials, args.pvalue)
-
-    print('Studying ter scores.')
-    assess_differences(a_ter, b_ter, args.trials, args.pvalue)
-
-    print('Studying beer scores.')
-    assess_differences(a_beer, b_beer, args.trials, args.pvalue)
+    print('Studying ' + args.metric + ' scores:')
+    assess_differences(a_scores, b_scores, args.trials, args.pvalue)
