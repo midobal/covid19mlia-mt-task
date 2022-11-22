@@ -20,7 +20,7 @@ The main challenge is that the text to be translated is specialized on the new a
 * [Data crawling, training and validation sets](round1/data).
 * [Test sets](round1/tests).
 
-### Evaluation
+### Evaluation scripts
 * [Automatic evaluation](round1/evaluation).
 * [Statistical differences](round1/art).
 
@@ -34,7 +34,7 @@ The main challenge is that the text to be translated is specialized on the new a
 * [Data crawling](round2/data).
 * [Training, validation and test sets](round2/partitions).
 
-### Evaluation
+### Evaluation scripts
 * [Automatic evaluation](round2/evaluation).
 * [Statistical differences](round2/art).
 
@@ -42,7 +42,7 @@ The main challenge is that the text to be translated is specialized on the new a
 * [Slides](https://mdomingo.me/presentations/COVID19MLIA2022.pdf).
 * [Presentation](https://youtu.be/C39UhuXMyNc?t=685).
 
-## Utilities
+## General utilities
 * [SGM generator](sgm/generator).
 * [SGM reader](sgm/reader).
 * [Translation Memory eXchange reader](tmx).
