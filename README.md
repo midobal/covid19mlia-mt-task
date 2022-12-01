@@ -48,4 +48,11 @@ The main challenge was that the text to be translated was specialized on the new
 * [Translation Memory eXchange reader](tmx).
 
 ## Findings
-* [Rolling report](https://bitbucket.org/covid19-mlia/organizers-task3/src/master/report/report.pdf).
+* [Findings of the Covid-19 MLIA Machine Translation Task](https://arxiv.org/abs/2211.07465).
+
+```
+Casacuberta, F., Ceausu, A., Choukri, K., Deligiannis, M., Domingo, M., García-Martínez,
+M., Herranz, M., Jacquet, G.,  Papavassiliou, V., Piperidis, S., Prokopidis, P., Roussis,
+D. and Salah, M. H. (2022). Findings of the Covid-19 MLIA Machine Translation Task.
+Under revision at Language Resources and Evaluation.
+```
